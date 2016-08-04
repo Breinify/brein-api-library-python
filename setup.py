@@ -3,7 +3,7 @@ from setuptools import setup
 setup(name='brein-api',
       version='0.1',
       description='Access to Breinify\'s DigitalDNA API',
-      url='http://github.com/Breinify/foobar',
+      url='https://github.com/Breinify/brein-api-library-python',
       author='Breinify',
       author_email='toddbodnar@breinify.com',
       license='MIT',

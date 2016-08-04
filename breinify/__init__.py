@@ -46,8 +46,8 @@ def getSupportedCategories():
 
 # TODO: signing
 def __pushActivity__(toPush, sign):
-    res = requests.post(connect.service_end_point + "/v1.0/controller/activity",
-                        data=json.dumps(toPush))  # data = toPush)
+    res = requests.post(connect.service_end_point + "activity",
+                        data=json.dumps(toPush))
     return res
 
 
@@ -58,7 +58,10 @@ def activity(user, activity_type, category, description, sign=False):
     connect.pool.apply_async(__pushActivity__, (toPush, sign,))
     return
 
-
-# TODO: all of this
 def lookup(user, fields):
-    return {"email": "toddbodnar@breinify.com", "first name": "todd"}
+    toPush = {"user": user.__dict__, "lookup": {"dimensions": fields}, "apiKey": connect.api_key}
+    response = requests.post(connect.service_end_point + "lookup", data=json.dumps(toPush))
+    if response.status_code != 200:
+        raise ConnectionError("Non-normal lookup response: " + str(response.status_code), response)
+    result = json.loads(response.text)
+    return result
