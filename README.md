@@ -50,7 +50,6 @@ The Breinify class is now configured with a valid configuration object.
 
 The engine powering the DigitalDNA API provides two endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 The engine is informed of an activity by executing *breinify.activity(...)*.
 
 ```python
@@ -68,42 +67,18 @@ That's it! The call will be run asynchronously in the background.
 
 Look-ups are used to retrieve dedicated information for a given user. 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-```java
-// define an array of subjects of interest
-final String[] dimensions = {"firstname",
+```python
+# define an array of subjects of interest
+dimensions = ["firstname",
        "gender",
        "age",
        "agegroup",
        "digitalfootprint",
-       "images"};
+       "images"]
 
-// wrap this array into BreinDimension
-final BreinDimension breinDimension = new BreinDimension(dimensions);
-
-// invoke the lookup
-final BreinResult result = Breinify.lookup(breinUser, breinDimension, false);
-
-// retrieve the values of interest
-final Object dataFirstname = result.get("firstname");
-final Object dataGender = result.get("gender");
-final Object dataAge = result.get("age");
-final Object dataAgeGroup = result.get("agegroup");
-final Object dataDigitalFootprinting = result.get("digitalfootprint");
-final Object dataImages = result.get("images");
+result = breinify.lookup(user, dimensions);
 
 ```
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#### Step 5: Teardown of the Library Services
-
-Depending of the rest engine (e.g. UNIREST) some threads needs to be stopped. This will be done by invoking the following statement:
-
-```
-// terminates the engine and possible open threads
-Breinify.shutdown();
-``` 
-
-Please note that after having invoked this call no further Breinify.activity or Breinify.lookup calls are possible. So it should only be part of your termination sequence of your program. Without this statement your program might not terminate.
 
 ### Further links
 To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
