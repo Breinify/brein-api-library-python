@@ -15,19 +15,21 @@ class user:
     """
     A specific user on your site
     """
-    def __init__(self, email, firstname=None, lastname=None, dateofbirth=None, imei=None, deviceid=None,
+
+    def __init__(self, email=None, firstname=None, lastname=None, dateofbirth=None, imei=None, deviceid=None,
                  sessionid=None):
         """
-        Potential identifiers for the user. Only email is required, but additional identifiers may improve the accuracy of the results
+        Potential identifiers for the user. All fields are optional, but additional identifiers may improve the accuracy of the results
         :param email: The user's email
-        :param firstname: The user's first name (Optional)
-        :param lastname: The user's last name (Optional)
-        :param dateofbirth: The user's date of birth (MM/DD/YYYY) (Optional)
-        :param imei: A user's cellular device (Optional)
-        :param deviceid: A user's device's unique identifier (Optional)
-        :param sessionid: A web session ID (Optional)
+        :param firstname: The user's first name
+        :param lastname: The user's last name
+        :param dateofbirth: The user's date of birth (MM/DD/YYYY)
+        :param imei: A user's cellular device
+        :param deviceid: A user's device's unique identifier
+        :param sessionid: A web session ID
         """
-        self.email = email
+        if email != None:
+            self.email = email
         ##don't store None values (it'll make the jsons smaller!)
         if firstname != None:
             self.firstName = firstname
