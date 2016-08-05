@@ -1,5 +1,10 @@
 from setuptools import setup
 
+
+def readme():
+      with open('README.rst') as f:
+            return f.read()
+
 setup(name='brein-api',
       version='0.1',
       description='Access to Breinify\'s DigitalDNA API',
@@ -7,5 +12,8 @@ setup(name='brein-api',
       author='Breinify',
       author_email='toddbodnar@breinify.com',
       license='MIT',
+      long_description=readme(),
       packages=['breinify'],
-      zip_safe=False)
+      install_requires=['requests'],
+      zip_safe=False,
+      include_package_data=True)
