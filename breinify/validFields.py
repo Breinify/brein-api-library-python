@@ -1,4 +1,4 @@
-lookup_dimensions = ["firstname", "lastname", "gender", "age", "agegroup", "digitalfootprint", "images"]
+lookup_dimensions = ["firstname", "gender", "age", "agegroup", "digitalfootprint", "images"]
 
 activities = ["search", "login", "logout", "addToCart", "removeFromCart", "selectProduct", "checkOut", "other"]
 
