@@ -6,7 +6,7 @@ def readme():
             return f.read()
 
 setup(name='brein-api',
-      version='0.1',
+      version='1.0',
       description='Access to Breinify\'s DigitalDNA API',
       url='https://github.com/Breinify/brein-api-library-python',
       author='Breinify',
