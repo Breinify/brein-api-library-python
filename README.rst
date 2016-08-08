@@ -1,7 +1,6 @@
-.. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/logo.png
-:width: 250px
+.. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/logo250px.png
     :align: center
-        :alt: Breinify API Java Library
+    :alt: Breinify API Python Library
 
 .. class:: center
 
@@ -109,4 +108,6 @@ Further links
 To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
 
 
-* [Breinify's Website](https://www.breinify.com).
+*  `Breinify's Website`__.
+
+.. __: https://www.breinify.com
