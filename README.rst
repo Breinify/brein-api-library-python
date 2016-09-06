@@ -69,9 +69,9 @@ For this example, pretend that a user named "John Doe" is logged in to your site
 .. code:: python
 
     #create a user you are interested in with their email and last name
-    example_user = breinify.user("john.doe@email.com");
+    example_user = breinify.user(email="john.doe@email.com");
 
-    breinify.activity(user,"search","services","b2b big data companies")
+    breinify.send_activity(user,"search","services","b2b big data companies")
 
 That's it! The call will be run asynchronously in the background. All fields in the user class are optional, but the more data you can supply, the more accurate the results will be.
 

@@ -1,16 +1,21 @@
 ```python
-result = breinify.lookup(example_user,["firstname","gender"])
-## should return "{'gender': {'result': 'MALE', 'accuracy': 1.0},
-##              'firstname': {'result': 'John', 'accuracy': 0.92}}"
+result = breinify.lookup(example_user,["firstname", "gender", "age", "agegroup", "digitalfootprint", "images"])
+
 name = result["firstname"]["result"]
-honorific = " "
-if result["gender"]["result"]=='MALE' and result["gender"]["accuracy"] > 0.80:
-    honorific = " Mr. "
-if result["gender"]["result"]=='FEMALE' and result["gender"]["accuracy"] > 0.80:
-    honorific = " Mrs. "
-if result["firstname"]["accuracy"] < 0.8: #don't customize if we're not sure about their name
-    honorific = ""
-    name = ""
-print("Hi"+honorific+name+"! What can we at Breinify do for you today?")
-##should print "Hi Mr. John! What can we at Breinify do for you today?"
+name_accuracy = result["firstname"]["accuracy"]
+
+gender = result["gender"]["result"]
+gender_accuracy = result["gender"]["accuracy"]
+
+age = result["age"]["result"]
+age_accuracy = result["age"]["accuracy"]
+
+agegroup = result["agegroup"]["result"]
+agegroup_accuracy = result["agegroup"]["accuracy"]
+
+digitalfootprint = result["digitalfootprint"]["result"]
+digitalfootprint_accuracy = result["digitalfootprint"]["accuracy"]
+
+images = result["images"]["result"]
+images_accuracy = result["images"]["accuracy"]
 ```

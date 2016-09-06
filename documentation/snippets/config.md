@@ -1,7 +1,14 @@
 ```python
 import breinify
 
-apiKey = "772A-47D7-93A3-4EA9-9D73-85B9-479B-16C6"
+apiKey = "C210-382D-32D7-4489-9FD1-4192-35CC-E5E8"
 
 breinify.setup(apiKey)
+
+# or
+
+secret = "327b6f07435811239bc4=="
+
+breinify.setup(apiKey,secret)
+
 ```

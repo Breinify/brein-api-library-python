@@ -1,4 +1,5 @@
 import base64
+import copy
 import hashlib
 import hmac
 import json
@@ -16,8 +17,7 @@ class user:
     A specific user on your site
     """
 
-    def __init__(self, email=None, firstname=None, lastname=None, dateofbirth=None, imei=None, deviceid=None,
-                 sessionid=None):
+    def __init__(self, **kwargs):
         """
         Potential identifiers for the user. All fields are optional, but additional identifiers may improve the accuracy of the results
         :param email: The user's email
@@ -27,22 +27,15 @@ class user:
         :param imei: A user's cellular device
         :param deviceid: A user's device's unique identifier
         :param sessionid: A web session ID
+        :param ip: A user's ip address
+        :param agentstring: A user's web browser's user agent string
         """
-        if email != None:
-            self.email = email
-        ##don't store None values (it'll make the jsons smaller!)
-        if firstname != None:
-            self.firstName = firstname
-        if lastname != None:
-            self.lastName = lastname
-        if dateofbirth != None:
-            self.dateOfBirth = dateofbirth
-        if imei != None:
-            self.imei = imei
-        if deviceid != None:
-            self.deviceId = deviceid
-        if sessionid != None:
-            self.sessionId = sessionid
+        validUserFields = ["email", "firstname", "lastName", "dateofbirth", "imei", "deviceid", "sessionid", "ip",
+                           "agentstring"]
+
+        for param in validUserFields:
+            if kwargs.get(param) is not None:
+                self.__dict__[param] = kwargs.get(param)
 
 
 def setup(api_key, secret=None, service_end_point="https://api.breinify.com/", threadPoolSize=10):
@@ -58,22 +51,51 @@ def setup(api_key, secret=None, service_end_point="https://api.breinify.com/", t
     setup.secret = secret
 
 
-def activity(user, activity_type, category, description):
+def send_activity(user, activity_type, category, description, tags=None, url=None, referrer=None, activity_time=None):
     """
     Reports a user's activity to the Brein Engine
     :param user: The user who's activity is being reported
-    :param activity_type: The type of activity (See getSupportedActivityTypes())
-    :param category: The category of the activity (See getSupportedCategoryTypes())
+    :param activity_type: The type of activity
+    :param category: The category of the activity
     :param description: A free text description of the activity
     """
-    if not activity_type in getSupportedActivityTypes():
-        raise BreinExceptions.invalidArguementException(activity_type, getSupportedActivityTypes())
-    if not category in getSupportedCategories():
-        raise BreinExceptions.invalidArguementException(category, getSupportedCategories())
-    toPush = {"user": user.__dict__,
-              "activity": {"type": activity_type, "category": category, "description": description},
-              "apiKey": setup.api_key,
-              "unixTimestamp": round(time.time())}
+    userResult = copy.copy(user.__dict__)
+
+    toPush = {"apiKey": setup.api_key}
+
+    additional = {}
+
+    if url is not None:
+        additional['url'] = url
+
+    if referrer is not None:
+        additional['referrer'] = referrer
+
+    if userResult['agentstring'] is not None:
+        additional['userAgent'] = userResult['agentstring']
+        del userResult['agentstring']
+
+    if userResult['ip'] is not None:
+        toPush['ipAddress'] = userResult['ip']
+        del userResult['ip']
+
+    if len(additional) > 0:
+        userResult['additional'] = additional
+
+    toPush['user'] = userResult
+
+    if activity_time is None:
+        toPush['unixTimestamp'] = round(time.time())
+    else:
+        toPush['unixTimestamp'] = activity_time
+
+    activity = {"type": activity_type, "category": category, "description": description}
+
+    if tags is not None:
+        activity['tags'] = tags
+
+    toPush['activity'] = activity
+
     setup.pool.apply_async(__pushActivity__, (toPush,))
 
 
@@ -98,14 +120,9 @@ def lookup(user, dimensions):
     result = json.loads(response.text)
     return result
 
+
 def getSupportedLookupDimensions():
     return validFields.lookup_dimensions
-
-def getSupportedActivityTypes():
-    return validFields.activities
-
-def getSupportedCategories():
-    return validFields.categories
 
 
 def __pushActivity__(toPush):
@@ -133,7 +150,8 @@ def __signLookup(toPush):
     if setup.secret is None:
         raise BreinExceptions.noSecretKeyException()
     message = (
-    toPush["lookup"]["dimensions"][0] + str(toPush["unixTimestamp"]) + str(len(toPush["lookup"]["dimensions"]))).encode(
+        toPush["lookup"]["dimensions"][0] + str(toPush["unixTimestamp"]) + str(
+            len(toPush["lookup"]["dimensions"]))).encode(
         "UTF-8")
     signature = base64.b64encode(
         hmac.new(setup.secret.encode("UTF-8"), message, digestmod=hashlib.sha256).digest()).decode("UTF-8")
