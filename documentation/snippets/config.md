@@ -6,7 +6,8 @@
 ```
 
 ```
-If you configured your key with our dashboard to require a signature, please add the following
+If you configured your key to require a signature, 
+please add the following
 ```
 
 >
