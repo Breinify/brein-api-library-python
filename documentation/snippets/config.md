@@ -5,8 +5,9 @@
     breinify.setup(apiKey)
 ```
 
-
+```
 If you configured your key with our dashboard to require a signature, please add the following
+```
 
 >
 ```python
