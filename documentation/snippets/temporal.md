@@ -2,7 +2,7 @@
 #create a user you are interested in with their email and last name
 example_user = breinify.user(ip="143.127.128.10")
 
-result = breinify.temporal(example_user)
+result = breinify.temporal_data(example_user)
 
 result["weather"]
 #{'cloudCover': 12.0, 'windStrength': 1.35, 'description': 'few clouds', 'temperature': 19.427999999999997,
