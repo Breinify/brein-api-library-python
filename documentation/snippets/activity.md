@@ -9,8 +9,7 @@ example_user = breinify.user(email="ziggy@email.com",
                              sessionid="3d16a9b2e0456a29d27a2c5fef040910",
                              ip="107.182.162.21",
                              agentstring="Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21."+
-                             "10 (KHTML, like Gecko) Mobile/7B405")
-
+                             "10 (KHTML, like Gecko) Mobile/7B405")                             
 breinify.send_activity(example_user,
                        "viewpage",
                        "apparel",
