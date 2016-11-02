@@ -1,5 +1,5 @@
 > ```python
-> # create a user you are interested in with their email and last name
+> # Create a user you are interested in with their email and last name
 > example_user = breinify.user(email="ziggy@email.com",
 >                              firstname="David",
 >                              dateofbirth="1/18/1974",
@@ -9,7 +9,8 @@
 >                              ip="107.182.162.21",
 >                              agentstring="Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21."+
 >                              "10 (KHTML, like Gecko) Mobile/7B405")
->                                                           
+>                                     
+> # Required fields are: user, activity_type, category, description
 > breinify.send_activity(example_user,
 >                        "viewpage",
 >                        "apparel",
