@@ -62,18 +62,36 @@ Step 4: Start using the library
 Placing activity triggers
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The engine powering the DigitalDNA API provides two endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
+The engine powering the DigitalDNA API provides three endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
 
 For this example, pretend that a user named "John Doe" is logged in to your site with his email address (john.doe@email.com) and is searching for a B2B big data company. You can log this activity with the Breinify API using the following code:
 
 .. code:: python
 
     #create a user you are interested in with their email and last name
-    example_user = breinify.user(email="john.doe@email.com");
+    example_user = breinify.user(email="john.doe@email.com")
 
     breinify.send_activity(user,"search","services","b2b big data companies")
 
 That's it! The call will be run asynchronously in the background. All fields in the user class are optional, but the more data you can supply, the more accurate the results will be.
+
+Temporal Data Lookup
+^^^^^^^^^^^^^^^^^^^^
+
+At the same time, you may want to customize the user's experience based on their local environment.
+
+.. code:: python
+    #create a user you are interested in based on their ip. Other fields (coordinates, time, etc) can also be included
+    example_user = breinify.user(ip="143.127.128.10")
+
+    result = breinify.temporal_data(example_user)
+
+The result variable will contain a dictionary with information about the place the user is at, for example:
+
+.. code:: python
+    print(result)
+
+    {'location': {'state': 'CA', 'lon': -121.827179, 'granularity': 'city', 'city': 'San Jose', 'lat': 37.366051, 'country': 'US'}, 'holidays': [{'source': 'United Nations', 'types': ['SPECIAL_DAY'], 'holiday': 'World Cities Day'}, {'source': 'Public Information', 'types': ['HALLMARK'], 'holiday': 'Halloween'}], 'time': {'localDay': 31, 'epochYear': 2016, 'localMonth': 10, 'localDayName': 'Monday', 'epochMonth': 10, 'localFormatIso8601': '2016-10-31T13:17:42-07:00', 'localHour': 13, 'localYear': 2016, 'epoch': 1477945062, 'epochHour': 20, 'timezone': 'America/Los_Angeles', 'epochDay': 31, 'localMinute': 17, 'localSecond': 42, 'epochSecond': 42, 'epochDayName': 'Monday', 'epochMinute': 17, 'epochFormatIso8601': '2016-10-31T20:17:42+00:00'}, 'weather': {'description': 'scattered clouds', 'temperature': 13.161000000000001, 'lastMeasured': 1477935065, 'precipitation': {'precipitationAmount': 0.0, 'precipitationType': 'none'}, 'windStrength': 1.4, 'measuredAt': {'lon': -121.767731, 'lat': 37.23328}, 'cloudCover': 48.0}}
 
 
 Placing look-up triggers
@@ -82,6 +100,7 @@ Placing look-up triggers
 Some time later, you may want to send a message to this user, but you only have their email address. You can query the Breinify lookup API to find necessary fields to personalize the message.
 
 .. code:: python
+    example_user = breinify.user(email="john.doe@email.com")
 
     result = breinify.lookup(example_user,["firstname","gender"])
     ## should return "{'gender': {'result': 'MALE', 'accuracy': 1.0},

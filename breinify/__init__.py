@@ -29,9 +29,12 @@ class user:
         :param sessionid: A web session ID
         :param ip: A user's ip address
         :param agentstring: A user's web browser's user agent string
+        :param location: A map of (longitude+latitude)
+        :param localDateTime: The user's local time
+        :param timeZone: the user's timezone
         """
         validUserFields = ["email", "firstname", "lastName", "dateofbirth", "imei", "deviceid", "sessionid", "ip",
-                           "agentstring"]
+                           "agentstring", "location", "localDateTime", "timeZone"]
 
         for param in validUserFields:
             if kwargs.get(param) is not None:
@@ -121,6 +124,42 @@ def lookup(user, dimensions):
     return result
 
 
+def temporal_data(user, unixtime=None):
+    """
+    Looks up information about a given location at a given time
+    :param user: The user info to be used to resolve the location
+    :param unixtime: The time for which data should be looked up for
+    :return resolved information (holidays, weather, etc)
+    """
+    userResult = copy.copy(user.__dict__)
+
+    toPush = {"apiKey": setup.api_key}
+
+    additional = {}
+
+    if userResult['ip'] is not None:
+        toPush['ipAddress'] = userResult['ip']
+        del userResult['ip']
+
+    if unixtime is None:
+        toPush['unixTimestamp'] = round(time.time())
+    else:
+        toPush = unixtime
+
+    additional['additional'] = userResult
+
+    toPush['user'] = additional
+
+    if setup.secret is not None:
+        __signTemporal(toPush)
+
+    response = requests.post(setup.service_end_point + "temporaldata", data=json.dumps(toPush))
+    if response.status_code != 200:
+        raise BreinExceptions.BreinAPIConnectionError(response)
+    result = json.loads(response.text)
+    return result
+
+
 def getSupportedLookupDimensions():
     return validFields.lookup_dimensions
 
@@ -138,12 +177,17 @@ def __pushActivity__(toPush):
         pass
 
 
-def __signActivity(toPush):
-    message = (toPush["activity"]["type"] + str(toPush["unixTimestamp"]) + "1").encode("UTF-8")
+def __hashSig(toPush, message):
     signature = base64.b64encode(
-        hmac.new(setup.secret.encode("UTF-8"), message, digestmod=hashlib.sha256).digest()).decode("UTF-8")
+        hmac.new(setup.secret.encode("UTF-8"), message.encode("UTF-8"), digestmod=hashlib.sha256).digest()) \
+        .decode("UTF-8")
     toPush["signature"] = signature
     toPush["signatureType"] = "HmacSHA256"
+
+
+def __signActivity(toPush):
+    message = (toPush["activity"]["type"] + str(toPush["unixTimestamp"]) + "1").encode("UTF-8")
+    __hashSig(toPush, message)
 
 
 def __signLookup(toPush):
@@ -151,9 +195,15 @@ def __signLookup(toPush):
         raise BreinExceptions.noSecretKeyException()
     message = (
         toPush["lookup"]["dimensions"][0] + str(toPush["unixTimestamp"]) + str(
-            len(toPush["lookup"]["dimensions"]))).encode(
-        "UTF-8")
-    signature = base64.b64encode(
-        hmac.new(setup.secret.encode("UTF-8"), message, digestmod=hashlib.sha256).digest()).decode("UTF-8")
-    toPush["signature"] = signature
-    toPush["signatureType"] = "HmacSHA256"
+            len(toPush["lookup"]["dimensions"]))).encode("UTF-8")
+    __hashSig(toPush, message)
+
+
+def __signTemporal(toPush):
+    message = str(toPush["unixTimestamp"]) + "-"
+    if ("user" in toPush) & ("additional" in toPush["user"]) & ("localDateTime" in toPush["user"]["additional"]):
+        message = message + str(toPush["user"]["additional"]["localDateTime"])
+    message = message + "-"
+    if ("user" in toPush) & ("additional" in toPush["user"]) & ("timeZone" in toPush["user"]["additional"]):
+        message = message + str(toPush["user"]["additional"]["timeZone"])
+    __hashSig(toPush, message)
