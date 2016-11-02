@@ -4,22 +4,21 @@
 > 
 > result = breinify.temporal_data(example_user)
 > 
-> result["weather"]
-> # {'cloudCover': 12.0, 'windStrength': 1.35, 'description': 'few clouds', 'temperature': 19.427999999999997,
-> # 'precipitation': {'precipitationType': 'NONE', 'precipitationAmount': 0.0}, 'lastMeasured': 1477523622}
+> weather = result["weather"]
+> location = result["location"]
+> time = result["time"]
+> holidays = result["holidays"]
+>
+> # Create a user with their IP address, 
+> example_user = breinify.user(ip="143.127.128.10",
+>                              timeZone="America/New_York",
+>                              localDateTime="Wed Oct 26 2016 13:02:06 GMT-0700 (EDT)",
+>                              location={longitude=-73.935242, latitude=40.730610})
 > 
-> result["location"]
-> # {'country': 'US', 'state': 'CA', 'lat': 37.366051, 'city': 'San Jose', 'granularity': 'city', 'lon': -121.827179}
+> result = breinify.temporal_data(example_user)
 > 
-> result["time"]
-> # {'localHour': 12, 'localMinute': 54, 'timezone': 'America/Los_Angeles', 'localYear': 2016, 'epochYear': 2016,
-> # 'localDayName': 'Monday', 'epoch': 1477943668, 'epochMonth': 10, 'localFormatIso8601': '2016-10-31T12:54:28-07:00',
-> # 'localSecond': 28, 'localDay': 31, 'epochDay': 31, 'epochDayName': 'Monday', 'epochSecond': 28, 'localMonth': 10,
-> # 'epochFormatIso8601': '2016-10-31T19:54:28+00:00', 'epochMinute': 54, 'epochHour': 19}
-> 
-> result["holidays"]
-> # [
-> #     {'holiday': 'World Cities Day', 'source': 'United Nations', 'types': ['SPECIAL_DAY']},
-> #     {'holiday': 'Halloween', 'source': 'Public Information', 'types': ['HALLMARK']}
-> # ]
+> weather = result["weather"]
+> location = result["location"]
+> time = result["time"]
+> holidays = result["holidays"]
 > ```
