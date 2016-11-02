@@ -1,5 +1,5 @@
 > ```python
-> # Create a user you are interested in with their email and last name
+> # Create a user with just their IP address 
 > example_user = breinify.user(ip="143.127.128.10")
 > 
 > result = breinify.temporal_data(example_user)
