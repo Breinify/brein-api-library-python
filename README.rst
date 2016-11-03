@@ -1,5 +1,5 @@
 .. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/logo250px.png
-:align: center
+    :align: center
     :alt: Breinify API Python Library
 
 .. class:: center
@@ -93,7 +93,16 @@ The result variable will contain a dictionary with information about the place t
 
     print(result)
 
-    {'location': {'state': 'CA', 'lon': -121.827179, 'granularity': 'city', 'city': 'San Jose', 'lat': 37.366051, 'country': 'US'}, 'holidays': [{'source': 'United Nations', 'types': ['SPECIAL_DAY'], 'holiday': 'World Cities Day'}, {'source': 'Public Information', 'types': ['HALLMARK'], 'holiday': 'Halloween'}], 'time': {'localDay': 31, 'epochYear': 2016, 'localMonth': 10, 'localDayName': 'Monday', 'epochMonth': 10, 'localFormatIso8601': '2016-10-31T13:17:42-07:00', 'localHour': 13, 'localYear': 2016, 'epoch': 1477945062, 'epochHour': 20, 'timezone': 'America/Los_Angeles', 'epochDay': 31, 'localMinute': 17, 'localSecond': 42, 'epochSecond': 42, 'epochDayName': 'Monday', 'epochMinute': 17, 'epochFormatIso8601': '2016-10-31T20:17:42+00:00'}, 'weather': {'description': 'scattered clouds', 'temperature': 13.161000000000001, 'lastMeasured': 1477935065, 'precipitation': {'precipitationAmount': 0.0, 'precipitationType': 'none'}, 'windStrength': 1.4, 'measuredAt': {'lon': -121.767731, 'lat': 37.23328}, 'cloudCover': 48.0}}
+    {'location': {'state': 'CA', 'lon': -121.827179, 'granularity': 'city', 'city': 'San Jose', 'lat': 37.366051,
+    'country': 'US'}, 'holidays': [{'source': 'United Nations', 'types': ['SPECIAL_DAY'], 'holiday':
+    'World Cities Day'}, {'source': 'Public Information', 'types': ['HALLMARK'], 'holiday': 'Halloween'}], 'time':
+    {'localDay': 31, 'epochYear': 2016, 'localMonth': 10, 'localDayName': 'Monday', 'epochMonth': 10,
+    'localFormatIso8601': '2016-10-31T13:17:42-07:00', 'localHour': 13, 'localYear': 2016, 'epoch': 1477945062,
+    'epochHour': 20, 'timezone': 'America/Los_Angeles', 'epochDay': 31, 'localMinute': 17, 'localSecond': 42,
+    'epochSecond': 42, 'epochDayName': 'Monday', 'epochMinute': 17, 'epochFormatIso8601': '2016-10-31T20:17:42+00:00'},
+    'weather': {'description': 'scattered clouds', 'temperature': 13.161000000000001, 'lastMeasured': 1477935065,
+    'precipitation': {'precipitationAmount': 0.0, 'precipitationType': 'none'}, 'windStrength': 1.4, 'measuredAt':
+    {'lon': -121.767731, 'lat': 37.23328}, 'cloudCover': 48.0}}
 
 
 Placing look-up triggers
@@ -133,3 +142,4 @@ To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
 *  `Breinify's Website`__.
 
 .. __: https://www.breinify.com
+
