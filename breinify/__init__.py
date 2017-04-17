@@ -8,7 +8,7 @@ import requests
 import time
 from multiprocessing import Pool
 
-from . import BreinExceptions
+from . import brein_exception
 from . import validFields
 
 
@@ -92,7 +92,9 @@ def send_activity(user, activity_type, category, description, tags=None, url=Non
     else:
         toPush['unixTimestamp'] = activity_time
 
-    activity = {"type": activity_type, "category": category, "description": description}
+    activity = {"type": activity_type,
+                "category": category,
+                "description": description}
 
     if tags is not None:
         activity['tags'] = tags
@@ -106,56 +108,109 @@ def lookup(user, dimensions):
     """
     Lookup a given user's information
     :param user: The user that you want data about
-    :param dimensions: What types of data do you want? (see getSupportedLookupDimensions())
+    :param dimensions: What types of data do you want?
+    :                  (see getSupportedLookupDimensions())
     :param sign: Should we sign this lookup with your secret key?
-    :return: A map containing information about each of the specified dimensions for the user
+    :return: A map containing information about each of the specified
+    :        dimensions for the user
     """
-    toPush = {"user": user.__dict__, "lookup": {"dimensions": dimensions}, "apiKey": setup.api_key,
-              "unixTimestamp": round(time.time())}
+    toPush = {"user": user.__dict__, "lookup": {"dimensions": dimensions},
+              "apiKey": setup.api_key, "unixTimestamp": round(time.time())}
     for dim in dimensions:
         if not dim in getSupportedLookupDimensions():
-            raise BreinExceptions.invalidArguementException(dim, getSupportedLookupDimensions())
+            raise brein_exception.invalidArguementException(dim,
+                    getSupportedLookupDimensions())
     if setup.secret is not None:
         __signLookup(toPush)
-    response = requests.post(setup.service_end_point + "lookup", data=json.dumps(toPush))
+    response = requests.post(setup.service_end_point + "lookup",
+                             data=json.dumps(toPush))
     if response.status_code != 200:
-        raise BreinExceptions.BreinAPIConnectionError(response)
+        raise brein_exception.BreinAPIConnectionError(response)
     result = json.loads(response.text)
     return result
 
 
-def temporal_data(user, unixtime=None):
+def temporal_data(user = None,
+                  unixtime = None,
+                  ip = None,
+                  location_free_text = None,
+                  location_city = None,
+                  location_state = None,
+                  location_country = None,
+                  location_latitude = None,
+                  location_longitude = None):
     """
     Looks up information about a given location at a given time
     :param user: The user info to be used to resolve the location
     :param unixtime: The time for which data should be looked up for
+    :param ip: An ip address to resolve
+    :param location_free_text: A free text field to resolve a location from,
+                               example values are "San Francisco, CA" or "NYC"
+    :param location_city: The name of the city you want to resolve
+    :param location_state: The name of the state you want to resolve
+    :param location_country: The name of the country you want to resolve
+    :param location_latitude: The latitude to resolve, in decimal degrees
+    :param location_longitude: The longitude to resolve, in decimal degrees
     :return resolved information (holidays, weather, etc)
     """
-    userResult = copy.copy(user.__dict__)
+    if user is not None:
+        userResult = copy.copy(user.__dict__)
+    else:
+        userResult = {}
 
     toPush = {"apiKey": setup.api_key}
 
     additional = {}
 
-    if userResult['ip'] is not None:
+    if 'ip' in userResult is not None:
         toPush['ipAddress'] = userResult['ip']
         del userResult['ip']
+
+    if ip is not None:
+        toPush['ipAddress'] = ip
 
     if unixtime is None:
         toPush['unixTimestamp'] = round(time.time())
     else:
         toPush = unixtime
 
-    additional['additional'] = userResult
+    additional = userResult
 
-    toPush['user'] = additional
+    if 'location' in additional:
+        location = additional['location']
+    else:
+        location = {}
+
+    if location_city is not None:
+        location['city'] = location_city
+
+    if location_state is not None:
+        location['state'] = location_state
+
+    if location_country is not None:
+        location['country'] = location_country
+
+
+    if location_free_text is not None:
+        location['text'] = location_free_text
+
+
+    if location_latitude is not None:
+        location['latitude'] = location_latitude
+
+    if location_longitude is not None:
+        location['longitude'] = location_longitude
+
+    additional['location'] = location
+
+    toPush['user'] = {"additional":additional}
 
     if setup.secret is not None:
         __signTemporal(toPush)
 
     response = requests.post(setup.service_end_point + "temporaldata", data=json.dumps(toPush))
     if response.status_code != 200:
-        raise BreinExceptions.BreinAPIConnectionError(response)
+        raise brein_exception.BreinAPIConnectionError(response)
     result = json.loads(response.text)
     return result
 
@@ -171,7 +226,7 @@ def __pushActivity__(toPush):
         if setup.secret is not None:
             __signActivity(toPush)
         if res.status_code != 200:
-            raise BreinExceptions.BreinAPIConnectionError(res)
+            raise brein_exception.BreinAPIConnectionError(res)
     except Exception as e:
         logging.getLogger("breinify").error(e)
         pass
@@ -192,7 +247,7 @@ def __signActivity(toPush):
 
 def __signLookup(toPush):
     if setup.secret is None:
-        raise BreinExceptions.noSecretKeyException()
+        raise brein_exception.noSecretKeyException()
     message = (
         toPush["lookup"]["dimensions"][0] + str(toPush["unixTimestamp"]) + str(
             len(toPush["lookup"]["dimensions"]))).encode("UTF-8")

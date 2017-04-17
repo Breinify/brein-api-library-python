@@ -23,6 +23,11 @@ class TestHashFunctions(unittest.TestCase):
         }}
         breinify.__signLookup(toPush)
         self.assertEqual("o/LBuRFrlbZDG9OLdZRrYC2ERYqwIxdv4Dloj/GCeLQ=", toPush["signature"])
+        
+    def test_sign_temporal(self):
+        toPush = {"unixTimeStamp": 1451962516}
+        breinify.__signTemporal(toPush)
+        self.assertEqual("slh36zSa0drIQY6k5MdhhRd/y8nly0jl7gGlVmhVWE8=", toPush["signature"])
 
 if __name__ == '__main__':
     unittest.main()

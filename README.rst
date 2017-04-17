@@ -156,36 +156,6 @@ The result variable will contain a dictionary with information about the place t
         }
     }
 
-
-
-Placing look-up triggers
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Some time later, you may want to send a message to this user, but you only have their email address. You can query the Breinify lookup API to find necessary fields to personalize the message.
-
-.. code:: python
-
-    example_user = breinify.user(email="john.doe@email.com")
-
-    result = breinify.lookup(example_user,["firstname","gender"])
-    ## should return "{'gender': {'result': 'MALE', 'accuracy': 1.0},
-    ##              'firstname': {'result': 'John', 'accuracy': 0.92}}"
-    name = result["firstname"]["result"]
-    honorific = " "
-    if result["gender"]["result"]=='MALE' and result["gender"]["accuracy"] > 0.80:
-        honorific = " Mr. "
-    if result["gender"]["result"]=='FEMALE' and result["gender"]["accuracy"] > 0.80:
-        honorific = " Mrs. "
-    if result["firstname"]["accuracy"] < 0.8: #don't customize if we're not sure about their name
-        honorific = ""
-        name = ""
-    print("Hi"+honorific+name+"! What can we at Breinify do for you today?")
-    ##should print "Hi Mr. John! What can we at Breinify do for you today?"
-
-A demonstration function is available in demo.py.
-
-With Breinify's advanced artificial intelligence engine, you were able to customize a user's experience and probably increase their engagement with just a few lines of code!
-
 Further links
 -------------
 
@@ -195,4 +165,3 @@ To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
 *  `Breinify's Website`__.
 
 .. __: https://www.breinify.com
-
