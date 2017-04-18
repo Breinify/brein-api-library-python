@@ -118,7 +118,7 @@ class breinify:
                   "apiKey": self.api_key, "unixTimestamp": round(time.time())}
         for dim in dimensions:
             if not dim in self.getSupportedLookupDimensions():
-                raise brein_exception.invalidArguementException(dim,
+                raise brein_exception.invalidArgumentException(dim,
                         getSupportedLookupDimensions())
         if self.secret is not None:
             __signLookup(toPush)

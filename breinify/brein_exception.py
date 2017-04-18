@@ -4,9 +4,9 @@ class BreinAPIConnectionError(ConnectionError):
         .__init__("Non-normal lookup response: " +
          str(response.status_code), response)
 
-class invalidArguementException(ValueError):
+class invalidArgumentException(ValueError):
     def __init__(self, value, expected):
-        super(invalidArguementException, self)\
+        super(invalidArgumentException, self)\
         .__init__("Got '" + str(value) + "' expected one of " +
         str(expected),value)
 
