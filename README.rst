@@ -1,11 +1,5 @@
-.. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/logo250px.png
-    :align: center
-    :alt: Breinify API Python Library
-
-.. class:: center
-
-Breinify's DigitalDNA API puts dynamic behavior-based, people-driven data right at your fingertips.
-
+.. raw:: html
+   <p align="center"><img src="https://www.breinify.com/img/Breinify_logo.png" alt="Breinify API Python Library" width="250"></p>
 
 Step By Step Introductions
 ==========================
