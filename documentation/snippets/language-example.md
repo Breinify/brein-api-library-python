@@ -1,5 +1,5 @@
 <blockquote class="lang-specific python">
-<p>You selected the documentation for the Python language utilizing the JavaScript Browser library.
+<p>You selected the documentation for the Python language for <b>Python 3</b>.
 The library is deployed under the MIT License and is available as <a href="https://github.com/Breinify/brein-api-library-python">open-source project</a>
 on GitHub.</p>
 </blockquote>
