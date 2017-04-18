@@ -1,6 +1,7 @@
 <blockquote class="lang-specific python">
 <p>The Python library supports calls to temporal data by either passing a user object for a user who's location you want
-   to get information about, for example</blockquote>
+   to get information about, for example:
+</blockquote>
 
 >
 ```python
