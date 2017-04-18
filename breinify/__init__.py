@@ -123,8 +123,7 @@ class Breinify:
             activity['tags'] = tags
 
         to_push['activity'] = activity
-
-        self.pool.apply_async(self.__pushActivity__, (to_push,))
+        return self.pool.apply_async(self.__pushActivity__, (to_push,))
 
     def lookup(self, user, dimensions):
         """
@@ -194,7 +193,7 @@ class Breinify:
         if unixtime is None:
             to_push['unixTimestamp'] = round(time.time())
         else:
-            to_push = unixtime
+            to_push['unixTimestamp'] = unixtime
 
         additional = userResult
 
@@ -242,12 +241,11 @@ class Breinify:
 
     def __pushActivity__(self, to_push):
         try:
-            res = requests.post(self.service_end_point + "activity",
-                                data=json.dumps(to_push))
             if self.secret is not None:
                 self.__signActivity(to_push)
-            if res.status_code != 200:
-                raise brein_exception.BreinAPIConnectionError(res)
+            res = requests.post(self.service_end_point + "activity",
+                                data=json.dumps(to_push))
+            return res
         except Exception as e:
             logging.getLogger("breinify").error(e)
             pass
@@ -283,3 +281,8 @@ class Breinify:
                     message = message + str(to_push["user"]["additional"]["timeZone"])
 
         self.__hashSig(to_push, message)
+
+    def __getstate__(self):
+        self_dict = self.__dict__.copy()
+        del self_dict['pool']
+        return self_dict
