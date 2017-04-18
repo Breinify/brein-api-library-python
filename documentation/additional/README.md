@@ -70,7 +70,7 @@ Your output should look like:
 
 ### User Makes Purchase
 
-See `send_purchase_activity.py` for an example of how to log that a user purchased something. The `send_activity`
+See [`send_purchase_activity.py`](./send_purchase_activity.py) for an example of how to log that a user purchased something. The `send_activity`
 function runs asynchronously and returns an `ApplyResult` object.
 
 Your output should look like:
