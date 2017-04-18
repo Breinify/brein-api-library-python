@@ -11,7 +11,7 @@ info = brein.temporal_data(user = user)
 ```
 
 <blockquote class="lang-specific python">
-<p>or a description of the location itself.</p>
+<p>or a description of the location itself.'</p>
 </blockquote>
 
 
