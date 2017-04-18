@@ -4,7 +4,7 @@ to get information about</p></blockquote>
 
 >
 ```python
-user = breinify.user(ip = "75.123.012.123")
+user = User(ip = "75.123.012.123")
 
 info = brein.temporal_data(user = user)
 ```

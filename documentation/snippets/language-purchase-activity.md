@@ -6,7 +6,7 @@ tags = {
     'productPrices': [ 134.23, 15.13, 12.99 ]
 }
 
-u = user(sessionid = s_id)
+user = User(sessionid = s_id)
 
-brein.send_activity(u, 'checkOut', tags = tags)
+brein.send_activity(user, 'checkOut', tags = tags)
 ```

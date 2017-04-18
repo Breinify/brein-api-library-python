@@ -1,13 +1,12 @@
-import breinify
-
+from breinify import Breinify, User
 
 def fancy_print(email):
     """
     Generates a sample email based of an email address
     :param email: The user's email address
     """
-    brein = breinify.breinify("YOURAPIKEY")
-    result = brein.lookup(breinify.user(email=email), ["firstname", "gender"])
+    brein = Breinify("YOURAPIKEY")
+    result = brein.lookup(User(email=email), ["firstname", "gender"])
     name = result["firstname"]["result"]
     honorific = " "
     if result["gender"]["result"] == 'MALE' and result["gender"]["accuracy"] > 0.80:

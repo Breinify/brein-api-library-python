@@ -12,14 +12,15 @@ from . import brein_exception
 from . import validFields
 
 
-class user:
+class User:
     """
     A specific user on your site
     """
 
     def __init__(self, **kwargs):
         """
-        Potential identifiers for the user. All fields are optional, but additional identifiers may improve the accuracy of the results
+        Potential identifiers for the user. All fields are optional, but additional identifiers may improve the
+        accuracy of the results.
         :param email: The user's email
         :param firstname: The user's first name
         :param lastname: The user's last name
@@ -33,14 +34,25 @@ class user:
         :param localDateTime: The user's local time
         :param timeZone: the user's timezone
         """
-        validUserFields = ["email", "firstname", "lastName", "dateofbirth", "imei", "deviceid", "sessionid", "ip",
-                           "agentstring", "location", "localDateTime", "timeZone"]
+        validUserFields = ["email",
+                           "firstname",
+                           "lastName",
+                           "dateofbirth",
+                           "imei",
+                           "deviceid",
+                           "sessionid",
+                           "ip",
+                           "agentstring",
+                           "location",
+                           "localDateTime",
+                           "timeZone"]
 
         for param in validUserFields:
             if kwargs.get(param) is not None:
                 self.__dict__[param] = kwargs.get(param)
 
-class breinify:
+
+class Breinify:
     def __init__(self, api_key, secret=None, service_end_point="https://api.breinify.com/", threadPoolSize=10):
         """Initialize a connection to the Breinify API
         :param api_key: Your API key, available through Breinify.com
@@ -53,18 +65,29 @@ class breinify:
         self.pool = Pool(processes=threadPoolSize)
         self.secret = secret
 
-
-    def send_activity(self, user, activity_type, category, description, tags=None, url=None, referrer=None, activity_time=None):
+    def send_activity(self,
+                      user,
+                      activity_type,
+                      category=None,
+                      description=None,
+                      tags=None,
+                      url=None,
+                      referrer=None,
+                      activity_time=None):
         """
         Reports a user's activity to the Brein Engine
         :param user: The user who's activity is being reported
         :param activity_type: The type of activity
         :param category: The category of the activity
         :param description: A free text description of the activity
+        :param tags: Custom tags describing the activity
+        :param url: A description of where the activity took place
+        :param referrer: Where the user came from
+        :param activity_time: A unix timestamp of when the activity happened
         """
         userResult = copy.copy(user.__dict__)
 
-        toPush = {"apiKey": self.api_key}
+        to_push = {"apiKey": self.api_key}
 
         additional = {}
 
@@ -74,23 +97,23 @@ class breinify:
         if referrer is not None:
             additional['referrer'] = referrer
 
-        if userResult['agentstring'] is not None:
+        if 'agentString' in userResult:
             additional['userAgent'] = userResult['agentstring']
             del userResult['agentstring']
 
-        if userResult['ip'] is not None:
-            toPush['ipAddress'] = userResult['ip']
+        if 'ip' in userResult:
+            to_push['ipAddress'] = userResult['ip']
             del userResult['ip']
 
         if len(additional) > 0:
             userResult['additional'] = additional
 
-        toPush['user'] = userResult
+        to_push['user'] = userResult
 
         if activity_time is None:
-            toPush['unixTimestamp'] = round(time.time())
+            to_push['unixTimestamp'] = round(time.time())
         else:
-            toPush['unixTimestamp'] = activity_time
+            to_push['unixTimestamp'] = activity_time
 
         activity = {"type": activity_type,
                     "category": category,
@@ -99,10 +122,9 @@ class breinify:
         if tags is not None:
             activity['tags'] = tags
 
-        toPush['activity'] = activity
+        to_push['activity'] = activity
 
-        self.pool.apply_async(__pushActivity__, (toPush,))
-
+        self.pool.apply_async(self.__pushActivity__, (to_push,))
 
     def lookup(self, user, dimensions):
         """
@@ -114,32 +136,31 @@ class breinify:
         :return: A map containing information about each of the specified
         :        dimensions for the user
         """
-        toPush = {"user": user.__dict__, "lookup": {"dimensions": dimensions},
+        to_push = {"user": user.__dict__, "lookup": {"dimensions": dimensions},
                   "apiKey": self.api_key, "unixTimestamp": round(time.time())}
         for dim in dimensions:
             if not dim in self.getSupportedLookupDimensions():
-                raise brein_exception.invalidArgumentException(dim,
-                        getSupportedLookupDimensions())
+                raise brein_exception.invalidArgumentException(dim,self.getSupportedLookupDimensions())
         if self.secret is not None:
-            __signLookup(toPush)
+            self.__signLookup(to_push)
         response = requests.post(self.service_end_point + "lookup",
-                                 data=json.dumps(toPush))
+                                 data=json.dumps(to_push))
         if response.status_code != 200:
             raise brein_exception.BreinAPIConnectionError(response)
         result = json.loads(response.text)
         return result
 
-
     def temporal_data(self,
-                      user = None,
-                      unixtime = None,
-                      ip = None,
-                      location_free_text = None,
-                      location_city = None,
-                      location_state = None,
-                      location_country = None,
-                      location_latitude = None,
-                      location_longitude = None):
+                      user=None,
+                      unixtime=None,
+                      ip=None,
+                      location_free_text=None,
+                      location_city=None,
+                      location_state=None,
+                      location_country=None,
+                      location_latitude=None,
+                      location_longitude=None,
+                      location_shapes=None):
         """
         Looks up information about a given location at a given time
         :param user: The user info to be used to resolve the location
@@ -152,6 +173,8 @@ class breinify:
         :param location_country: The name of the country you want to resolve
         :param location_latitude: The latitude to resolve, in decimal degrees
         :param location_longitude: The longitude to resolve, in decimal degrees
+        :param location_shapes: A list of shapefiles to return. Valid options are
+                                "NEIGHBORHOOD", "CITY", "STATE", and "COUNTY".
         :return resolved information (holidays, weather, etc)
         """
         if user is not None:
@@ -159,21 +182,19 @@ class breinify:
         else:
             userResult = {}
 
-        toPush = {"apiKey": self.api_key}
-
-        additional = {}
+        to_push = {"apiKey": self.api_key}
 
         if 'ip' in userResult is not None:
-            toPush['ipAddress'] = userResult['ip']
+            to_push['ipAddress'] = userResult['ip']
             del userResult['ip']
 
         if ip is not None:
-            toPush['ipAddress'] = ip
+            to_push['ipAddress'] = ip
 
         if unixtime is None:
-            toPush['unixTimestamp'] = round(time.time())
+            to_push['unixTimestamp'] = round(time.time())
         else:
-            toPush = unixtime
+            to_push = unixtime
 
         additional = userResult
 
@@ -191,10 +212,8 @@ class breinify:
         if location_country is not None:
             location['country'] = location_country
 
-
         if location_free_text is not None:
             location['text'] = location_free_text
-
 
         if location_latitude is not None:
             location['latitude'] = location_latitude
@@ -202,68 +221,65 @@ class breinify:
         if location_longitude is not None:
             location['longitude'] = location_longitude
 
+        if location_shapes is not None:
+            location['shapeTypes'] = location_shapes
+
         additional['location'] = location
 
-        toPush['user'] = {"additional":additional}
+        to_push['user'] = {"additional": additional}
 
         if self.secret is not None:
-            __signTemporal(toPush)
+            self.__signTemporal(to_push)
 
-        response = requests.post(self.service_end_point + "temporaldata", data=json.dumps(toPush))
+        response = requests.post(self.service_end_point + "temporaldata", data=json.dumps(to_push))
         if response.status_code != 200:
             raise brein_exception.BreinAPIConnectionError(response)
         result = json.loads(response.text)
         return result
 
-
     def getSupportedLookupDimensions(self):
         return validFields.lookup_dimensions
 
-
-    def __pushActivity__(self, toPush):
+    def __pushActivity__(self, to_push):
         try:
             res = requests.post(self.service_end_point + "activity",
-                                data=json.dumps(toPush))
+                                data=json.dumps(to_push))
             if self.secret is not None:
-                __signActivity(toPush)
+                self.__signActivity(to_push)
             if res.status_code != 200:
                 raise brein_exception.BreinAPIConnectionError(res)
         except Exception as e:
             logging.getLogger("breinify").error(e)
             pass
 
-
-    def __hashSig(self, toPush, message):
+    def __hashSig(self, to_push, message):
         signature = base64.b64encode(
             hmac.new(self.secret.encode("UTF-8"), str(message).encode("UTF-8"), digestmod=hashlib.sha256).digest()) \
             .decode("UTF-8")
-        toPush["signature"] = signature
-        toPush["signatureType"] = "HmacSHA256"
+        to_push["signature"] = signature
+        to_push["signatureType"] = "HmacSHA256"
 
+    def __signActivity(self, to_push):
+        message = (to_push["activity"]["type"] + str(to_push["unixTimestamp"]) + "1")
+        self.__hashSig(to_push, message)
 
-    def __signActivity(self, toPush):
-        message = (toPush["activity"]["type"] + str(toPush["unixTimestamp"]) + "1")
-        self.__hashSig(toPush, message)
-
-
-    def __signLookup(self, toPush):
+    def __signLookup(self, to_push):
         if self.secret is None:
             raise brein_exception.noSecretKeyException()
         message = (
-            toPush["lookup"]["dimensions"][0] + str(toPush["unixTimestamp"]) + str(
-                len(toPush["lookup"]["dimensions"])))
-        self.__hashSig(toPush, message)
+            to_push["lookup"]["dimensions"][0] + str(to_push["unixTimestamp"]) + str(len(to_push["lookup"]["dimensions"])))
+        self.__hashSig(to_push, message)
 
-    def __signTemporal(self, toPush):
-        message = str(toPush["unixTimestamp"]) + "-"
-        if "user" in toPush:
-            if "additional" in toPush["user"]:
-                if "localDateTime" in toPush["user"]["additional"]:
-                    message = message + str(toPush["user"]["additional"]["localDateTime"])
+    def __signTemporal(self, to_push):
+        message = str(to_push["unixTimestamp"]) + "-"
+        if "user" in to_push:
+            if "additional" in to_push["user"]:
+                if "localDateTime" in to_push["user"]["additional"]:
+                    message = message + str(to_push["user"]["additional"]["localDateTime"])
         message = message + "-"
-        if "user" in toPush:
-            if "additional" in toPush["user"]:
-                if "timeZone" in toPush["user"]["additional"]:
-                    message = message + str(toPush["user"]["additional"]["timeZone"])
+        if "user" in to_push:
+            if "additional" in to_push["user"]:
+                if "timeZone" in to_push["user"]["additional"]:
+                    message = message + str(to_push["user"]["additional"]["timeZone"])
 
-        self.__hashSig(toPush, message)
+        self.__hashSig(to_push, message)

@@ -1,4 +1,5 @@
 import breinify
+import json
 
 
 def printAt(location):
@@ -7,7 +8,7 @@ def printAt(location):
     :param location: A string describing a US city.
     :return: The city's dictionary
     """
-    brein = breinify.breinify("YOURAPIKEY")
+    brein = breinify.Breinify("YOURAPIKEY")
     result = brein.temporal_data(location_free_text = location)
     print("Information for "+location+":")
     print("-----------------------------")
