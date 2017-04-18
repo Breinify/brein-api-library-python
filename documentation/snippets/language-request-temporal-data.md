@@ -11,16 +11,8 @@ info = brein.temporal_data(user = user)
 ```
 
 <blockquote class="lang-specific python">
-<p>or a description of the location itself.'</p>
+<p>or a description of the location itself.</p>
 </blockquote>
-
-
->
-```python
-from breinify import User
-user = User(ip = "72.229.28.185")
-info = brein.temporal_data(user = user)
-```
 
 >
 ```python
