@@ -1,4 +1,5 @@
 .. raw:: html
+
    <p align="center"><img src="https://www.breinify.com/img/Breinify_logo.png" alt="Breinify API Python Library" width="250"></p>
 
 Step By Step Introductions
