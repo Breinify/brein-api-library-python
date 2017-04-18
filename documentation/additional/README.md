@@ -62,7 +62,7 @@ Run `point2shape.py` to get the shapes of the state that a give point is in. Not
 which you can get by running `pip3 install matplotlib`.
 
 Your output should look like:
-![The expected output](https://github.com/https://github.com/Breinify/brein-api-library-python/blob/master/documentation/img/florida.png "")
+![The expected output](https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/florida.png "")
 
 
 
