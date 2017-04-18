@@ -1,10 +1,13 @@
 import breinify
 
-breinify.setup("YOURAPIKEY")
-
 
 def fancy_print(email):
-    result = breinify.lookup(breinify.user(email=email), ["firstname", "gender"])
+    """
+    Generates a sample email based of an email address
+    :param email: The user's email address
+    """
+    brein = breinify.breinify("YOURAPIKEY")
+    result = brein.lookup(breinify.user(email=email), ["firstname", "gender"])
     name = result["firstname"]["result"]
     honorific = " "
     if result["gender"]["result"] == 'MALE' and result["gender"]["accuracy"] > 0.80:
@@ -12,10 +15,11 @@ def fancy_print(email):
     if result["gender"]["result"] == 'FEMALE' and result["gender"]["accuracy"] > 0.80:
         honorific = " Mrs. "
     if result["firstname"]["accuracy"] < 0.80:
-        ##if we aren't sure about their name, don't guess it!
+        ##if we aren't sure about their gender, don't guess it!
         honorific = ""
         name = ""
     print("Hi" + honorific + name + "! What can we at Breinify do for you today?")
 
 
-fancy_print("john.doe@email.com")
+if __name__ == '__main__':
+    fancy_print("john.doe@email.com")

@@ -117,7 +117,7 @@ class breinify:
         toPush = {"user": user.__dict__, "lookup": {"dimensions": dimensions},
                   "apiKey": self.api_key, "unixTimestamp": round(time.time())}
         for dim in dimensions:
-            if not dim in getSupportedLookupDimensions():
+            if not dim in self.getSupportedLookupDimensions():
                 raise brein_exception.invalidArguementException(dim,
                         getSupportedLookupDimensions())
         if self.secret is not None:
@@ -216,7 +216,7 @@ class breinify:
         return result
 
 
-    def getSupportedLookupDimensions():
+    def getSupportedLookupDimensions(self):
         return validFields.lookup_dimensions
 
 
