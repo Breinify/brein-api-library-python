@@ -5,7 +5,6 @@
 >
 ```python
 from breinify import Breinify
-
 brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A')
 ```
 
@@ -15,5 +14,5 @@ brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A')
 
 >
 ```python
-brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A','aaaaabbbbbbcccccc=')
+brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A','utakxp7sm6weo5gvk7cytw==')
 ```

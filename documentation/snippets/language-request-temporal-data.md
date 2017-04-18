@@ -4,8 +4,7 @@ to get information about</p></blockquote>
 
 >
 ```python
-user = User(ip = "75.123.012.123")
-
+user = User(ip = "72.229.28.185")
 info = brein.temporal_data(user = user)
 ```
 
