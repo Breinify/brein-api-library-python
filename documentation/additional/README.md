@@ -70,4 +70,26 @@ Your output should look like:
 
 ### User Makes Purchase
 
+See `send_purchase_activity.py` for an example of how to log that a user purchased something. The `send_activity`
+function runs asynchronously and returns an `ApplyResult` object.
+
+Your output should look like:
+
+```
+<Response [200]>
+```
+
+If you are signed up for our analytics service and used your api key, then you will be able to see the activity on your dashboard also.
+
 ### User Registers
+
+See `send_register_activity.py` for an example of how to log that a user has registered or logged in. The `send_activity`
+function runs asynchronously and returns an `ApplyResult` object.
+
+Your output should look like:
+
+```
+<Response [200]>
+```
+
+If you are signed up for our analytics service and used your api key, then you will be able to see the activity on your dashboard also.
