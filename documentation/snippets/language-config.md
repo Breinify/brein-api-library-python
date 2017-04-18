@@ -4,6 +4,8 @@
 
 >
 ```python
+from breinify import breinify
+
 brein = breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A')
 ```
 
