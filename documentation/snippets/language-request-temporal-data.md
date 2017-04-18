@@ -4,6 +4,7 @@ to get information about</p></blockquote>
 
 >
 ```python
+from breinify import User
 user = User(ip = "72.229.28.185")
 info = brein.temporal_data(user = user)
 ```
