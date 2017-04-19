@@ -82,7 +82,8 @@ You may want to customize the user's experience based on where they are. For exa
 
 .. code:: python
 
-    #create a user you are interested in based on their ip. Other fields (coordinates, time, etc) can also be included
+    # Create a user you are interested in based on their ip.
+    # Other fields (coordinates, time, etc) can also be included
     example_user = User(ip="143.127.128.10")
 
     result = brein.temporal_data(example_user)
@@ -121,7 +122,10 @@ For example, you could get yesterday's weather in San Francisco by running:
 
     result = brein.temporal_data(location_free_text="San Francisco, CA", unixtime = yesterday)
 
-    print("Yesterday in %s, the weather was %s with a temperature of %d F."%(result['location']['city'], result['weather']['description'], result['weather']['temperatureF']))
+    print("Yesterday in %s, the weather was %s with a temperature of %d F."%
+             (result['location']['city'],
+              result['weather']['description'],
+              result['weather']['temperatureF']))
 
 Which will print something similar to:
 
