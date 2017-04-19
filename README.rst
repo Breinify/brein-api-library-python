@@ -11,7 +11,7 @@
      <a href="https://github.com/Breinify/brein-api-library-python/blob/master/LICENSE">
        <img src="https://img.shields.io/pypi/l/brein-api.svg" alt = "MIT"/>
      </a>
-     <small>Features: <b>Temporal Data, (Reverse) Geocoding, Events, Weather, Holidays, Analytics</b></small>
+     <sup>Features: <b>Temporal Data, (Reverse) Geocoding, Events, Weather, Holidays, Analytics</b></sup>
    </div></br>
 
 This library simplifies access to Breinify's API for tasks like geocoding, reverse geocoding, weather and events look up, and holidays determination based on information such as a user's ip address, coordinates, or reported location.  In addition, this documentation gives detailed examples for each of the features available for the different endpoints.
