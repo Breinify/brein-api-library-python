@@ -123,7 +123,11 @@ For example, you could get yesterday's weather in San Francisco by running:
 
     print("Yesterday in %s, the weather was %s with a temperature of %d F."%(result['location']['city'], result['weather']['description'], result['weather']['temperatureF']))
 
-Which will print something similar to "Yesterday in San Francisco, the weather was overcast clouds with a temperature of 64 F."
+Which will print something similar to:
+
+.. code::
+
+   Yesterday in San Francisco, the weather was overcast clouds with a temperature of 64 F.
 
 
 Placing activity triggers
