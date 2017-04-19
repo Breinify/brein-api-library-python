@@ -2,10 +2,10 @@
 
    <p align="center"><img src="https://www.breinify.com/img/Breinify_logo.png" alt="Breinify API Python Library" width="250"></p>
 
-.. image:: https://img.shields.io/pypi/v/brein-api.svg
+.. |logo1| image:: https://img.shields.io/pypi/v/brein-api.svg
    :scale: 100%
    :align: middle
-.. image:: https://img.shields.io/pypi/l/brein-api.svg
+.. |logo2| image:: https://img.shields.io/pypi/l/brein-api.svg
    :scale: 50%
    :align: top
 
