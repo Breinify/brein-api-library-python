@@ -149,15 +149,13 @@ will return both
 
 .. raw:: html
 
-   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_location.png" alt="A sample json response" width="250"></p>
-" alt="Breinify API Python Library" width="250"></p>
+   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_location_json.png" alt="A sample json response" width="250"></p>
 
 and
 
 .. raw:: html
 
-   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/florida.png" alt="A map of Florida" width="250"></p>
-" alt="Breinify API Python Library" width="350"></p>
+   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/florida.png" alt="A map of Florida" width="350"></p>
 
 
 * The full code for this example is available `here`__
@@ -170,7 +168,7 @@ Placing activity triggers
 
 The API provides support for analytics based on user behavior on your site or app by sending user activities to the `/activity` endpoint. Since the `/activity` endpoint only consumes data, calls to it in the Python library are sent asynchronously.
 
-For this example, pretend that a user named "John Doe" is logged in to your site with his email address (``john.doe@email.com``) is viewing the page "www.example.com". You can log this by executing:
+For this example, pretend that a user named "John Doe" is logged in to your site with his email address, ``john.doe@email.com``, is viewing the page "www.example.com". You can log this by executing:
 
 .. code:: python
 
