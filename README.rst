@@ -3,13 +3,17 @@
    <p align="center"><img src="https://www.breinify.com/img/Breinify_logo.png" alt="Breinify API Python Library" width="250"></p>
 
 .. image:: https://img.shields.io/pypi/v/brein-api.svg
+   :scale: 100%
+   :align: middle
 .. image:: https://img.shields.io/pypi/l/brein-api.svg
+   :scale: 50%
+   :align: top
 
 This library simplies access to Breinify's API for tasks like geocoding, reverse geocoding, weather and events look up, and holidays determination based on information such as a user's ip address, coordinates, or reported location.  In addition, this documentation gives detailed examples for each of the features available for the different endpoints.
 
-TemporalData Endpoint: The endpoint offers features to resolve temporal information like a timestamp, a location (latitude and longitude or free-text), or an IP-address, to temporal information (e.g., timezone, epoch, formatted dates, day-name), holidays at the specified time and location, city, zip-code, neighborhood, country, or county of the location, events at the specified time and location (e.g., description, size, type), weather at the specified time and location (e.g., description, temperature).
+*TemporalData Endpoint:* The endpoint offers features to resolve temporal information like a timestamp, a location (latitude and longitude or free-text), or an IP-address, to temporal information (e.g., timezone, epoch, formatted dates, day-name), holidays at the specified time and location, city, zip-code, neighborhood, country, or county of the location, events at the specified time and location (e.g., description, size, type), weather at the specified time and location (e.g., description, temperature).
 
-Activity Endpoint: The endpoint is used to understand the usage-patterns and the behavior of a user using, e.g., an application, a mobile app, or a web-browser. The endpoint offers analytics and insights through Breinify's dashboard.
+*Activity Endpoint:* The endpoint is used to understand the usage-patterns and the behavior of a user using, e.g., an application, a mobile app, or a web-browser. The endpoint offers analytics and insights through Breinify's dashboard.
 
 Quick start
 ===========
