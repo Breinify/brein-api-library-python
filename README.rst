@@ -55,14 +55,19 @@ In order to use the library you need a valid API-key, which you can get for free
 
 **938D-3120-64DD-413F-BB55-6573-90CE-473A**
 
+and this secret:
+
+**utakxp7sm6weo5gvk7cytw==**
+
 .. code:: python
 
     from breinify import Breinify
 
     ##this is a valid API key
     apiKey = "938D-3120-64DD-413F-BB55-6573-90CE-473A"
+    secret = "utakxp7sm6weo5gvk7cytw=="
 
-    brein = Breinify(apiKey)
+    brein = Breinify(apiKey, secret)
 
 
 The Breinify class is now configured with a valid configuration object.
@@ -78,7 +83,7 @@ Temporal Data Lookup
 Looking Up a User's Location's Info
 +++++++++++++++++++++++++++++++++++
 
-You may want to customize the user's experience based on where they are. For example calling
+You may want to enrich a user information or customize their experience based on where they are. For example calling
 
 .. code:: python
 
