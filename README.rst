@@ -103,10 +103,10 @@ will result in a dictionary of timely information for the location the ip addres
 
 Which will print something similar to:
 
-.. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_response.png
-   :width: 400 px
-   :scale: 50%
-   :alt: The resultant json
+.. raw:: html
+
+   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_response.png" alt="sample output" width="400"></p>
+
 
 Looking Up Information About a Location
 +++++++++++++++++++++++++++++++++++++++
