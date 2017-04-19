@@ -151,7 +151,7 @@ will return both
 
    <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_location_json.png" alt="A sample json response" width="250"></p>
 
-and
+and the shape file to draw
 
 .. raw:: html
 
