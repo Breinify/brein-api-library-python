@@ -2,15 +2,14 @@
 
    <p align="center"><img src="https://www.breinify.com/img/Breinify_logo.png" alt="Breinify API Python Library" width="250"></p>
 
-Step By Step Introductions
-==========================
+.. image:: https://img.shields.io/pypi/v/brein-api.svg
+.. image:: https://img.shields.io/pypi/l/brein-api.svg
 
-What is Breinify's DigitialDNA
-------------------------------
+This library simplies access to Breinify's API for tasks like geocoding, reverse geocoding, weather and events look up, and holidays determination based on information such as a user's ip address, coordinates, or reported location.  In addition, this documentation gives detailed examples for each of the features available for the different endpoints.
 
-Breinify's DigitalDNA API puts dynamic behavior-based, people-driven data right at your fingertips. We believe that in many situations, a critical component of a great user experience is personalization. With all the data available on the web it should be easy to provide a unique experience to every visitor, and yet, sometimes you may find yourself wondering why it is so difficult.
+TemporalData Endpoint: The endpoint offers features to resolve temporal information like a timestamp, a location (latitude and longitude or free-text), or an IP-address, to temporal information (e.g., timezone, epoch, formatted dates, day-name), holidays at the specified time and location, city, zip-code, neighborhood, country, or county of the location, events at the specified time and location (e.g., description, size, type), weather at the specified time and location (e.g., description, temperature).
 
-Thanks to **Breinify's DigitalDNA** you are now able to adapt your online presence to your visitors needs and **provide a unique experience**. Let's walk step-by-step through a simple example.
+Activity Endpoint: The endpoint is used to understand the usage-patterns and the behavior of a user using, e.g., an application, a mobile app, or a web-browser. The endpoint offers analytics and insights through Breinify's dashboard.
 
 Quick start
 ===========
@@ -21,7 +20,7 @@ Download the library from PyPi and install it with
 
 .. code:: bash
 
-    pip3 install breinify-api
+    pip3 install brein-api
 
 or download the source from github and run
 
@@ -45,9 +44,11 @@ Step 3: Configure the library
 
 In order to use the library you need a valid API-key, which you can get for free at https://www.breinify.com. In this example, we assume you have the following api-key:
 
-**772A-47D7-93A3-4EA9-9D73-85B9-479B-16C6**
+**938D-3120-64DD-413F-BB55-6573-90CE-473A**
 
 .. code:: python
+
+    from breinify import Breinify
 
     ##this is a valid API key
     apiKey = "938D-3120-64DD-413F-BB55-6573-90CE-473A"
@@ -60,23 +61,6 @@ The Breinify class is now configured with a valid configuration object.
 
 Step 4: Start using the library
 -------------------------------
-
-Placing activity triggers
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The engine powering the DigitalDNA API provides three endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
-
-For this example, pretend that a user named "John Doe" is logged in to your site with his email address (john.doe@email.com) is viewing the page "www.example.com". You can log this by executing:
-
-.. code:: python
-
-    from breinify import User
-    #create a user you are interested in with their email and last name
-    example_user = User(email="john.doe@email.com")
-
-    brein.send_activity(example_user, "pageView", url="www.example.com")
-
-The call will then be run asynchronously in the background.
 
 Temporal Data Lookup
 ^^^^^^^^^^^^^^^^^^^^
@@ -131,6 +115,25 @@ For example, you could get yesterday's weather in San Francisco by running:
     print("Yesterday in %s, the weather was %s with a temperature of %d F."%(result['location']['city'], result['weather']['description'], result['weather']['temperatureF']))
 
 Which will print something similar to "Yesterday in San Francisco, the weather was overcast clouds with a temperature of 64 F."
+
+
+Placing activity triggers
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The engine powering the DigitalDNA API provides three endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
+
+For this example, pretend that a user named "John Doe" is logged in to your site with his email address (john.doe@email.com) is viewing the page "www.example.com". You can log this by executing:
+
+.. code:: python
+
+    from breinify import User
+    #create a user you are interested in with their email and last name
+    example_user = User(email="john.doe@email.com")
+
+    brein.send_activity(example_user, "pageView", url="www.example.com")
+
+The call will then be run asynchronously in the background.
+
 
 Further links
 -------------
