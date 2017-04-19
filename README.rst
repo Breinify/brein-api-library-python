@@ -6,6 +6,7 @@
 
    <img src="https://img.shields.io/pypi/v/brein-api.svg" alt = "Current Version" style="float: left;"/> &nbsp; <img src="https://img.shields.io/pypi/l/brein-api.svg" alt = "MIT"/>
 
+
 This library simplifies access to Breinify's API for tasks like geocoding, reverse geocoding, weather and events look up, and holidays determination based on information such as a user's ip address, coordinates, or reported location.  In addition, this documentation gives detailed examples for each of the features available for the different endpoints.
 
 *TemporalData Endpoint:* The endpoint offers features to resolve temporal information like a timestamp, a location (latitude and longitude or free-text), or an IP-address, to temporal information (e.g., timezone, epoch, formatted dates, day-name), holidays at the specified time and location, city, zip-code, neighborhood, country, or county of the location, events at the specified time and location (e.g., description, size, type), weather at the specified time and location (e.g., description, temperature).
