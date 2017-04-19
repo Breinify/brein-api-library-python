@@ -173,7 +173,8 @@ class Breinify:
         :param location_latitude: The latitude to resolve, in decimal degrees
         :param location_longitude: The longitude to resolve, in decimal degrees
         :param location_shapes: A list of shapefiles to return. Valid options are
-                                "NEIGHBORHOOD", "CITY", "STATE", and "COUNTY".
+                                "NEIGHBORHOOD", "CITY", "POSTAL" (zip code,) "STATE",
+                                and "COUNTY".
         :return resolved information (holidays, weather, etc)
         """
         if user is not None:

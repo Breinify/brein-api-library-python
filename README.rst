@@ -137,6 +137,9 @@ Further links
 
 To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
 
+*  `Additional Code Examples`__.
+
+.. __: https://github.com/Breinify/brein-api-library-python/tree/master/documentation/additional
 
 *  `Breinify's Website`__.
 
