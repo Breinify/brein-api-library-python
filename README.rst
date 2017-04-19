@@ -55,7 +55,7 @@ In order to use the library you need a valid API-key, which you can get for free
 
 **938D-3120-64DD-413F-BB55-6573-90CE-473A**
 
-and this secret:
+Additionally, you can supply an optional secret, which is recommended for the Python library. Here, we'll use this secret:
 
 **utakxp7sm6weo5gvk7cytw==**
 
@@ -89,7 +89,7 @@ You may want to enrich a user information or customize their experience based on
 
     # Create a user you are interested in based on their ip.
     # Other fields (coordinates, time, etc) can also be included
-    example_user = User(ip="143.127.128.10")
+    example_user = User(ip = "143.127.128.10")
 
     result = brein.temporal_data(example_user)
 

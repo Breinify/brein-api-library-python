@@ -4,5 +4,5 @@
 
 >
 ```python
-info = brein.temporal_data(ip = "72.229.28.185")
+info = brein.temporal_data(ip="72.229.28.185")
 ```

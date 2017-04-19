@@ -8,7 +8,7 @@ pip3 install brein-api
 ```
 
 <blockquote class="lang-specific python">
-<p>Additionally, you can install the library from source running:</p>
+<p>Additionally, you can install the library from sorce (available on [Github](https://github.com/breinify/brein-api-library-python)) by running:</p>
 </blockquote>
 
 >

@@ -6,7 +6,7 @@
 
 Run [`about_you.py`](./about_you.py) to get information about where you are running the script from.
 
-For example, you may get output like:
+For example, you will get output like:
 
 ```
 You are in San Francisco, the local time there is 2017-04-18T15:30:55-07:00 and the weather is broken clouds.
@@ -16,7 +16,7 @@ You are in San Francisco, the local time there is 2017-04-18T15:30:55-07:00 and 
 
 Run [`ip2local.py`](./ip2local.py) to get information a user accessing your site from a given ip address.
 
-For example, you may get output like:
+For example, you will get output like:
 
 ```
 204.22.122.60 is in Lansing, MI, the local time there is 2017-04-18T18:32:21-04:00.
@@ -25,7 +25,7 @@ For example, you may get output like:
 ### Latitude / Longitude to City Name
 Run [`point2loc.py`](./point2loc.py) lookup a location based on a latitude/longitude pair.
 
-For example, you may get output like:
+For example, you will get output like:
 
 ```
 The point 28.538300,-81.379200 is in Orlando, FL.
@@ -35,7 +35,7 @@ The point 28.538300,-81.379200 is in Orlando, FL.
 
 Run [`get_major_events.py`](./get_major_events.py) to get a list of major events happening today in San Francisco.
 
-For example, you may get output like:
+For example, you will get output like:
 ```
 There are 5 major events happening today in San Francisco, CA
 They are:
@@ -50,7 +50,7 @@ They are:
 
 Run [`get_holiday.py`](./get_holiday.py) to get a holiday greeting.
 
-For example, you may get output like:
+For example, you will get output like:
 ```
 Happy Easter Sunday!
 ```
@@ -73,7 +73,7 @@ Your output should look like:
 See [`send_purchase_activity.py`](./send_purchase_activity.py) for an example of how to log that a user purchased something. The `send_activity`
 function runs asynchronously and returns an `ApplyResult` object.
 
-Your output should look like:
+Your output will be:
 
 ```
 <Response [200]>
@@ -86,7 +86,7 @@ If you are signed up for our analytics service and used your api key, then you w
 See [`send_register_activity.py`](./send_register_activity.py) for an example of how to log that a user has registered or logged in. The `send_activity`
 function runs asynchronously and returns an `ApplyResult` object.
 
-Your output should look like:
+Your output will be:
 
 ```
 <Response [200]>

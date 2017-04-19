@@ -8,5 +8,5 @@ brein = Breinify(apiKey)
 
 result = brein.temporal_data(ip=ipaddress)
 
-print("%s is in %s, %s, the local time there is %s." % (
-ipaddress, result['location']['city'], result['location']['state'], result['time']['localFormatIso8601']))
+print("%s is in %s, %s, the local time there is %s." %
+      (ipaddress, result['location']['city'], result['location']['state'], result['time']['localFormatIso8601']))
