@@ -104,7 +104,9 @@ will result in a dictionary of timely information for the location the ip addres
 Which will print something similar to:
 
 .. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_response.png
-   :width: 400px
+   :width: 400 px
+   :scale: 50%
+   :alt: The resultant json
 
 Looking Up Information About a Location
 +++++++++++++++++++++++++++++++++++++++
