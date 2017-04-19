@@ -98,9 +98,9 @@ will result in a dictionary of timely information for the location the ip addres
 .. code:: python
 
     #wrap the result in json.dumps() for readability
-    print(json.dumps(result,indent=4))
+    print(json.dumps(result, indent = 4))
 
-Which will print something similar to:
+Which will print:
 
 .. raw:: html
 
@@ -123,36 +123,62 @@ For example, you could get yesterday's weather in San Francisco by running:
 
     brein = Breinify(apiKey)
 
-    yesterday = math.floor(time.time()) - 24*60*60
+    yesterday = math.floor(time.time()) - 24 * 60 * 60
 
-    result = brein.temporal_data(location_free_text="San Francisco, CA", unixtime = yesterday)
+    result = brein.temporal_data(location_free_text = "San Francisco, CA", unixtime = yesterday)
 
     print("Yesterday in %s, the weather was %s with a temperature of %d F."%
              (result['location']['city'],
               result['weather']['description'],
               result['weather']['temperatureF']))
 
-Which will print something similar to:
+Which will output:
+
+Yesterday in **San Francisco**, the weather was **overcast clouds** with a temperature of **64** F.
+
+Reverse Geocoding
++++++++++++++++++
+
+We support looking up locations based on latitude and longitude and provide both information about the location and relevant shape files. For example
 
 .. code::
 
-   Yesterday in San Francisco, the weather was overcast clouds with a temperature of 64 F.
+    florida = brein.temporal_data(location_longitude=lon, location_latitude=lat, location_shapes = ["CITY","STATE"])
+
+will return both
+
+.. raw:: html
+
+   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_location.png" alt="A sample json response" width="250"></p>
+" alt="Breinify API Python Library" width="250"></p>
+
+and
+
+.. raw:: html
+
+   <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/florida.png" alt="A map of Florida" width="250"></p>
+" alt="Breinify API Python Library" width="350"></p>
+
+
+* The full code for this example is available `here`__
+
+.. __: https://github.com/Breinify/brein-api-library-python/blob/master/documentation/additional/point2shape.py
 
 
 Placing activity triggers
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The engine powering the DigitalDNA API provides three endpoints. The first endpoint is used to inform the engine about the activities performed by visitors of your site. The activities are used to understand the user's current interest and infer the intent. It becomes more and more accurate across different users and verticals as more activities are collected. It should be noted, that any personal information is not stored within the engine, thus each individual's privacy is well protected. The engine understands several different activities performed by a user, e.g., landing, login, search, item selection, or logout.
+The API provides support for analytics based on user behavior on your site or app by sending user activities to the `/activity` endpoint. Since the `/activity` endpoint only consumes data, calls to it in the Python library are sent asynchronously.
 
-For this example, pretend that a user named "John Doe" is logged in to your site with his email address (john.doe@email.com) is viewing the page "www.example.com". You can log this by executing:
+For this example, pretend that a user named "John Doe" is logged in to your site with his email address (``john.doe@email.com``) is viewing the page "www.example.com". You can log this by executing:
 
 .. code:: python
 
     from breinify import User
     #create a user you are interested in with their email and last name
-    example_user = User(email="john.doe@email.com")
+    example_user = User(email = "john.doe@email.com")
 
-    brein.send_activity(example_user, "pageView", url="www.example.com")
+    brein.send_activity(example_user, "pageView", url = "www.example.com")
 
 The call will then be run asynchronously in the background.
 
@@ -162,10 +188,10 @@ Further links
 
 To understand all the capabilities of Breinify's DigitalDNA API, take a look at:
 
-*  `Additional Code Examples`__.
+*  `Additional Code Samples`__
 
 .. __: https://github.com/Breinify/brein-api-library-python/tree/master/documentation/additional
 
-*  `Breinify's Website`__.
+*  `Breinify's Website`__
 
 .. __: https://www.breinify.com
