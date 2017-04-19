@@ -86,6 +86,7 @@ Looking Up a User's Location's Info
 +++++++++++++++++++++++++++++++++++
 
 You may want to customize the user's experience based on where they are. For example calling
+
 .. code:: python
 
     #create a user you are interested in based on their ip. Other fields (coordinates, time, etc) can also be included
@@ -100,67 +101,10 @@ will result in a dictionary of timely information for the location the ip addres
     #wrap the result in json.dumps() for readability
     print(json.dumps(result,indent=4))
 
-    {
-        "time": {
-            "epochDayName": "Monday",
-            "localYear": 2016,
-            "epoch": 1477945062,
-            "timezone": "America/Los_Angeles",
-            "localDay": 31,
-            "epochSecond": 42,
-            "epochMinute": 17,
-            "epochDay": 31,
-            "localMonth": 10,
-            "localMinute": 17,
-            "localDayName": "Monday",
-            "epochHour": 20,
-            "epochMonth": 10,
-            "epochYear": 2016,
-            "localFormatIso8601": "2016-10-31T13:17:42-07:00",
-            "localSecond": 42,
-            "localHour": 13,
-            "epochFormatIso8601": "2016-10-31T20:17:42+00:00"
-        },
-        "holidays": [
-            {
-                "source": "United Nations",
-                "types": [
-                    "SPECIAL_DAY"
-                ],
-                "holiday": "World Cities Day"
-            },
-            {
-                "source": "Public Information",
-                "types": [
-                    "HALLMARK"
-                ],
-                "holiday": "Halloween"
-            }
-        ],
-        "weather": {
-            "lastMeasured": 1477935065,
-            "precipitation": {
-                "precipitationType": "none",
-                "precipitationAmount": 0.0
-            },
-            "windStrength": 1.4,
-            "cloudCover": 48.0,
-            "temperature": 13.161000000000001,
-            "description": "scattered clouds",
-            "measuredAt": {
-                "lon": -121.767731,
-                "lat": 37.23328
-            }
-        },
-        "location": {
-            "country": "US",
-            "granularity": "city",
-            "city": "San Jose",
-            "lon": -121.827179,
-            "lat": 37.366051,
-            "state": "CA"
-        }
-    }
+Which will print something similar to:
+
+.. image:: https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_response.png
+   :width: 400px
 
 Looking Up Information About a Location
 +++++++++++++++++++++++++++++++++++++++
