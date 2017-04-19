@@ -4,7 +4,7 @@
 
 .. raw:: html
 
-   <div> <img src="https://img.shields.io/pypi/v/brein-api.svg" alt = "Current Version" style="float: left;"/> &nbsp; <img src="https://img.shields.io/pypi/l/brein-api.svg" alt = "MIT"/></div>
+   <div> <a href="https://pypi.python.org/pypi/brein-api/"><img src="https://img.shields.io/pypi/v/brein-api.svg" alt = "Current Version" style="float: left;"/></a> &nbsp; <a href="https://github.com/Breinify/brein-api-library-python/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/brein-api.svg" alt = "MIT"/></a></div>
 
 
 This library simplifies access to Breinify's API for tasks like geocoding, reverse geocoding, weather and events look up, and holidays determination based on information such as a user's ip address, coordinates, or reported location.  In addition, this documentation gives detailed examples for each of the features available for the different endpoints.
