@@ -1,6 +1,10 @@
 # Additional Code Samples
 
-## Temporal Knowledge
+Here we provide complete, working examples for several common use cases for both the `/temporaldata` and `/activity` endpoints.
+
+## Temporal Data
+
+The `/temporaldata` endpoint allows you to get information about a time and place with several lookup methods supported (IP Address, latitude/longitude, free text, etc.)
 
 ### About You
 
@@ -67,6 +71,8 @@ Your output should look like:
 
 
 ## Activities
+
+The `/activity` endpoint allows you to integrate with our real time analytics engine. The basis of our system is a stream of user's activity on your site or service.
 
 ### User Makes Purchase
 
