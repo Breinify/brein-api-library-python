@@ -16,5 +16,6 @@ info = brein.temporal_data(user=user)
 
 >
 ```python
-info = brein.temporal_data(location_free_text="san francisco, ca", unixtime=1492538271)
+info = brein.temporal_data(location_free_text="san francisco, ca",
+                           unixtime=1492538271)
 ```
