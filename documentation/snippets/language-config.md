@@ -14,7 +14,8 @@ brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A')
 
 >
 ```python
-brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A','utakxp7sm6weo5gvk7cytw==')
+brein = Breinify('938D-3120-64DD-413F-BB55-6573-90CE-473A',
+                 'utakxp7sm6weo5gvk7cytw==')
 ```
 
 <blockquote class="lang-specific python">

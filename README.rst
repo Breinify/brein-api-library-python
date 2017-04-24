@@ -125,7 +125,8 @@ For example, you could get yesterday's weather in San Francisco by running:
 
     yesterday = math.floor(time.time()) - 24 * 60 * 60
 
-    result = brein.temporal_data(location_free_text = "San Francisco, CA", unixtime = yesterday)
+    result = brein.temporal_data(location_free_text = "San Francisco, CA",
+                                 unixtime = yesterday)
 
     print("Yesterday in %s, the weather was %s with a temperature of %d F."%
              (result['location']['city'],
