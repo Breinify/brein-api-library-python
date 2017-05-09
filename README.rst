@@ -20,8 +20,8 @@ This library simplifies access to Breinify's API for tasks like geocoding, rever
 
 **Activity Endpoint:** The endpoint is used to understand the usage-patterns and the behavior of a user using, e.g., an application, a mobile app, or a web-browser. The endpoint offers analytics and insights through Breinify's dashboard.
 
-Quick start
-===========
+Quickstart
+==========
 
 Step 1: Download the Library
 ----------------------------
@@ -38,7 +38,7 @@ or download the source from github and run
     python3 setup.py install
 
 
-Step 2: Integrate the library
+Step 2: Integrate the Library
 -----------------------------
 Integrate the Library into your Python 3 project by importing the library in the relevant blocks of code.
 
@@ -48,7 +48,7 @@ Integrate the Library into your Python 3 project by importing the library in the
 
 
 
-Step 3: Configure the library
+Step 3: Configure the Library
 -----------------------------
 
 In order to use the library you need a valid API-key, which you can get for free at https://www.breinify.com. In this example, we assume you have the following api-key:
@@ -63,7 +63,7 @@ Additionally, you can supply an optional secret, which is recommended for the Py
 
     from breinify import Breinify
 
-    ##this is a valid API key
+    # This is a valid API key
     apiKey = "938D-3120-64DD-413F-BB55-6573-90CE-473A"
     secret = "utakxp7sm6weo5gvk7cytw=="
 
@@ -73,14 +73,14 @@ Additionally, you can supply an optional secret, which is recommended for the Py
 The Breinify class is now configured with a valid configuration object.
 
 
-Step 4: Start using the library
+Step 4: Start Using the library
 -------------------------------
 
 Temporal Data Lookup
 ^^^^^^^^^^^^^^^^^^^^
 
 
-Looking Up a User's Location's Info
+Looking up a User's Location's Info
 +++++++++++++++++++++++++++++++++++
 
 You may want to enrich a user information or customize their experience based on where they are. For example calling
@@ -97,7 +97,7 @@ will result in a dictionary of timely information for the location the ip addres
 
 .. code:: python
 
-    #wrap the result in json.dumps() for readability
+    # Wrap the result in json.dumps() for readability
     print(json.dumps(result, indent = 4))
 
 Which will print:
@@ -107,7 +107,7 @@ Which will print:
    <p align="center"><img src="https://raw.githubusercontent.com/Breinify/brein-api-library-python/master/documentation/img/sample_response.png" alt="sample output" width="400"></p>
 
 
-Looking Up Information About a Location
+Looking up Information About a Location
 +++++++++++++++++++++++++++++++++++++++
 
 Instead of looking up information based off a user's location, you can just supply the location's information directly.
@@ -164,7 +164,7 @@ and the shape file to draw
 .. __: https://github.com/Breinify/brein-api-library-python/blob/master/documentation/additional/point2shape.py
 
 
-Placing activity triggers
+Placing Activity Triggers
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The API provides support for analytics based on user behavior on your site or app by sending user activities to the `/activity` endpoint. Since the `/activity` endpoint only consumes data, calls to it in the Python library are sent asynchronously.
@@ -174,7 +174,7 @@ For this example, pretend that a user named "John Doe" is logged in to your site
 .. code:: python
 
     from breinify import User
-    #create a user you are interested in with their email and last name
+    # Create a user you are interested in with their email and last name
     example_user = User(email = "john.doe@email.com")
 
     brein.send_activity(example_user, "pageView", url = "www.example.com")
